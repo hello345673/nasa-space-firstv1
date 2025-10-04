@@ -1,0 +1,183 @@
+{% extends "base.html" %}
+
+{% block title %}About - Exoplanet Hunter AI{% endblock %}
+
+{% block content %}
+<div class="about-page">
+    <div class="container">
+        <h1 class="page-title">
+            <i class="fas fa-info-circle"></i>
+            About Exoplanet Hunter AI
+        </h1>
+
+        <div class="about-content">
+            <section class="about-section">
+                <h2><i class="fas fa-rocket"></i> Project Overview</h2>
+                <p>
+                    Exoplanet Hunter AI is an advanced machine learning system developed for the 
+                    <strong>2025 NASA Space Apps Challenge</strong>. This project addresses the challenge 
+                    "A World Away: Hunting for Exoplanets with AI" by creating an automated system 
+                    to identify exoplanets from mission data.
+                </p>
+                <p>
+                    With thousands of exoplanets discovered and terabytes of data collected by NASA's 
+                    space missions, manual analysis is becoming increasingly impractical. This AI system 
+                    democratizes exoplanet detection, making it accessible to researchers and space 
+                    enthusiasts worldwide.
+                </p>
+            </section>
+
+            <section class="about-section">
+                <h2><i class="fas fa-satellite"></i> Data Sources</h2>
+                <div class="mission-cards">
+                    <div class="mission-card">
+                        <h3>Kepler Mission</h3>
+                        <p>
+                            <strong>Duration:</strong> 2009-2018<br>
+                            <strong>Method:</strong> Transit photometry<br>
+                            <strong>Legacy:</strong> Over 2,600 confirmed exoplanets
+                        </p>
+                        <p>
+                            The Kepler mission revolutionized exoplanet science by continuously 
+                            monitoring 150,000 stars in a fixed field of view, detecting the 
+                            tiny dips in brightness caused by planets passing in front of their stars.
+                        </p>
+                    </div>
+
+                    <div class="mission-card">
+                        <h3>K2 Mission</h3>
+                        <p>
+                            <strong>Duration:</strong> 2014-2018<br>
+                            <strong>Method:</strong> Transit photometry<br>
+                            <strong>Innovation:</strong> Extended Kepler's life with new strategy
+                        </p>
+                        <p>
+                            After reaction wheel failures, K2 adapted by observing different fields 
+                            along the ecliptic plane, discovering hundreds more exoplanets and 
+                            studying various astronomical phenomena.
+                        </p>
+                    </div>
+
+                    <div class="mission-card">
+                        <h3>TESS Mission</h3>
+                        <p>
+                            <strong>Duration:</strong> 2018-Present<br>
+                            <strong>Method:</strong> Transit photometry<br>
+                            <strong>Coverage:</strong> Surveying the entire sky
+                        </p>
+                        <p>
+                            The Transiting Exoplanet Survey Satellite (TESS) is surveying 85% of 
+                            the sky, focusing on nearby bright stars where planets are easier to 
+                            study with follow-up observations.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="about-section">
+                <h2><i class="fas fa-brain"></i> Technology Stack</h2>
+                <div class="tech-grid">
+                    <div class="tech-item">
+                        <i class="fab fa-python"></i>
+                        <strong>Python</strong>
+                        <p>Core programming language</p>
+                    </div>
+                    <div class="tech-item">
+                        <i class="fas fa-flask"></i>
+                        <strong>Flask</strong>
+                        <p>Web framework</p>
+                    </div>
+                    <div class="tech-item">
+                        <i class="fas fa-robot"></i>
+                        <strong>scikit-learn</strong>
+                        <p>ML foundation</p>
+                    </div>
+                    <div class="tech-item">
+                        <i class="fas fa-chart-line"></i>
+                        <strong>XGBoost</strong>
+                        <p>Gradient boosting</p>
+                    </div>
+                    <div class="tech-item">
+                        <i class="fas fa-bolt"></i>
+                        <strong>LightGBM</strong>
+                        <p>Fast ML framework</p>
+                    </div>
+                    <div class="tech-item">
+                        <i class="fas fa-chart-bar"></i>
+                        <strong>Plotly</strong>
+                        <p>Interactive visualizations</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="about-section">
+                <h2><i class="fas fa-users"></i> Use Cases</h2>
+                <div class="use-cases">
+                    <div class="use-case">
+                        <h3>For Researchers</h3>
+                        <ul>
+                            <li>Quickly analyze large datasets from multiple missions</li>
+                            <li>Batch processing for systematic surveys</li>
+                            <li>High-accuracy classification with confidence scores</li>
+                            <li>Identify promising candidates for follow-up observations</li>
+                        </ul>
+                    </div>
+                    <div class="use-case">
+                        <h3>For Educators</h3>
+                        <ul>
+                            <li>Demonstrate real-world applications of AI/ML</li>
+                            <li>Interactive tool for teaching astronomy concepts</li>
+                            <li>Visualize model performance and feature importance</li>
+                            <li>Engage students with hands-on space exploration</li>
+                        </ul>
+                    </div>
+                    <div class="use-case">
+                        <h3>For Enthusiasts</h3>
+                        <ul>
+                            <li>Participate in citizen science efforts</li>
+                            <li>Learn about exoplanet detection methods</li>
+                            <li>Experiment with real NASA data</li>
+                            <li>Understand the characteristics of exoplanets</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section class="about-section">
+                <h2><i class="fas fa-trophy"></i> NASA Space Apps Challenge</h2>
+                <p>
+                    This project was created for the 2025 NASA Space Apps Challenge, a global 
+                    hackathon hosted by NASA. The challenge brings together teams from around 
+                    the world to solve real-world problems using NASA's open data.
+                </p>
+                <p>
+                    <strong>Challenge Category:</strong> A World Away: Hunting for Exoplanets with AI<br>
+                    <strong>Difficulty:</strong> Advanced<br>
+                    <strong>Date:</strong> October 4-5, 2025
+                </p>
+            </section>
+
+            <section class="about-section">
+                <h2><i class="fas fa-code"></i> Open Source</h2>
+                <p>
+                    This project is built using open-source technologies and NASA's publicly 
+                    available datasets. The code demonstrates best practices in machine learning, 
+                    data preprocessing, and web development.
+                </p>
+                <p>
+                    <strong>Key Features:</strong>
+                </p>
+                <ul>
+                    <li>Multi-mission data integration and harmonization</li>
+                    <li>Advanced ensemble learning techniques</li>
+                    <li>SMOTE for handling imbalanced datasets</li>
+                    <li>Interactive web interface with real-time predictions</li>
+                    <li>Comprehensive model evaluation and statistics</li>
+                    <li>Batch processing capabilities for large datasets</li>
+                </ul>
+            </section>
+        </div>
+    </div>
+</div>
+{% endblock %}
+

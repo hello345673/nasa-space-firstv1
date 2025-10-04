@@ -1,0 +1,101 @@
+======================================================================
+⚡ FAST TRAINING - 5-Fold Cross-Validation (Once)
+======================================================================
+======================================================================
+🔧 FIXED DATA PREPROCESSING - Proper Column Mapping
+======================================================================
+Loading Kepler dataset...
+   Kepler data loaded: 9564 samples, 12 features
+Loading TESS dataset...
+   TESS data loaded: 7703 samples, 11 features
+Loading K2 dataset...
+   K2 data loaded: 4004 samples, 9 features
+
+✅ Harmonizing datasets (all use standard column names)...
+   ✅ Standardized to 12 unified features (NO DUPLICATES!)
+
+📊 Combined Dataset Summary:
+   Total samples: 21,171
+   Unified features: 12
+   Features: ['dec', 'pl_eqt', 'pl_imppar', 'pl_insol', 'pl_orbper', 'pl_rade', 'pl_trandep', 'pl_trandur', 'ra', 'st_logg', 'st_rad', 'st_teff']
+
+🎯 Target Distribution:
+   Confirmed exoplanets: 10,366
+   Non-exoplanets: 10,805
+
+📉 Missing Data by Feature:
+   pl_eqt: 17.63% missing
+   pl_imppar: 56.54% missing
+   pl_insol: 17.82% missing
+   pl_orbper: 0.65% missing
+   pl_rade: 7.66% missing
+   pl_trandep: 20.15% missing
+   pl_trandur: 18.44% missing
+   st_logg: 13.11% missing
+   st_rad: 4.34% missing
+   st_teff: 7.33% missing
+======================================================================
+
+🔧 Preprocessing features...
+
+🚀 Creating Enhanced Ensemble Model...
+✅ Enhanced Ensemble Created (5 models × 1600 estimators each)
+
+======================================================================
+🎯 TRAINING MODEL (No CV - Single Training Run)
+======================================================================
+
+🎯 Final Training on Full Training Set...
+   ✅ Training completed in 276.1s (4.6 min)
+
+✅ Validation Metrics:
+   accuracy    : 0.8095 (80.95%)
+   precision   : 0.7733 (77.33%)
+   recall      : 0.8643 (86.43%)
+   f1_score    : 0.8163 (81.63%)
+   roc_auc     : 0.8818 (88.18%)
+
+📋 Classification Report:
+               precision    recall  f1-score   support
+
+Non-Exoplanet       0.85      0.76      0.80      1621
+    Exoplanet       0.77      0.86      0.82      1555
+
+     accuracy                           0.81      3176
+    macro avg       0.81      0.81      0.81      3176
+ weighted avg       0.81      0.81      0.81      3176
+
+
+======================================================================
+🏆 TEST SET EVALUATION
+======================================================================
+
+✅ Test Set Metrics:
+   test_accuracy     : 0.8196 (81.96%)
+   test_precision    : 0.7923 (79.23%)
+   test_recall       : 0.8559 (85.59%)
+   test_f1_score     : 0.8229 (82.29%)
+   test_roc_auc      : 0.8992 (89.92%)
+
+📋 Test Classification Report:
+               precision    recall  f1-score   support
+
+Non-Exoplanet       0.85      0.78      0.82      1621
+    Exoplanet       0.79      0.86      0.82      1555
+
+     accuracy                           0.82      3176
+    macro avg       0.82      0.82      0.82      3176
+ weighted avg       0.82      0.82      0.82      3176
+
+
+💾 Model saved!
+
+======================================================================
+🎉 TRAINING COMPLETE!
+======================================================================
+
+📈 Final Results:
+   Test Accuracy: 0.8196
+   Test F1:       0.8229
+   Test ROC-AUC:  0.8992
+======================================================================

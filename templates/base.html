@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Exoplanet Hunter AI{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <i class="fas fa-planet-ringed"></i>
+                <span>Exoplanet Hunter AI</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="{{ url_for('index') }}" {% if request.endpoint == 'index' %}class="active"{% endif %}>
+                    <i class="fas fa-home"></i> Home
+                </a></li>
+                <li><a href="{{ url_for('predict') }}" {% if request.endpoint == 'predict' %}class="active"{% endif %}>
+                    <i class="fas fa-search"></i> Predict
+                </a></li>
+                <li><a href="{{ url_for('statistics') }}" {% if request.endpoint == 'statistics' %}class="active"{% endif %}>
+                    <i class="fas fa-chart-line"></i> Statistics
+                </a></li>
+                <li><a href="{{ url_for('about') }}" {% if request.endpoint == 'about' %}class="active"{% endif %}>
+                    <i class="fas fa-info-circle"></i> About
+                </a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 NASA Space Apps Challenge | Exoplanet Hunter AI</p>
+            <p>Data from Kepler, K2, and TESS missions</p>
+        </div>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    {% block extra_js %}{% endblock %}
+</body>
+</html>
+

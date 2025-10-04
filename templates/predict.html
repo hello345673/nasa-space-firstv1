@@ -1,0 +1,178 @@
+{% extends "base.html" %}
+
+{% block title %}Predict - Exoplanet Hunter AI{% endblock %}
+
+{% block content %}
+<div class="predict-page">
+    <div class="container">
+        <h1 class="page-title">
+            <i class="fas fa-search-location"></i>
+            Exoplanet Detection
+        </h1>
+        
+        <div class="predict-tabs">
+            <button class="tab-btn active" data-tab="manual">
+                <i class="fas fa-keyboard"></i> Manual Entry
+            </button>
+            <button class="tab-btn" data-tab="upload">
+                <i class="fas fa-file-upload"></i> Batch Upload
+            </button>
+        </div>
+
+        <!-- Manual Entry Tab -->
+        <div class="tab-content active" id="manual-tab">
+            <div class="prediction-card">
+                <h3>Enter Exoplanet Parameters</h3>
+                <p class="help-text">
+                    <i class="fas fa-info-circle"></i>
+                    Enter known values for the planetary parameters. Leave fields blank if unknown - they'll be filled with typical values.
+                </p>
+                <form id="predict-form">
+                    <div class="form-grid">
+                        {% for feature in features[:10] %}
+                        <div class="form-group">
+                            <label for="{{ feature.name }}" title="{{ feature.description }}">
+                                {{ feature.label }}
+                            </label>
+                            <input type="number" step="any" id="{{ feature.name }}" name="{{ feature.name }}" 
+                                   placeholder="Optional" class="form-control">
+                        </div>
+                        {% endfor %}
+                    </div>
+                    
+                    {% if features|length > 10 %}
+                    <div class="more-features" id="more-features" style="display: none;">
+                        <div class="form-grid">
+                            {% for feature in features[10:] %}
+                            <div class="form-group">
+                                <label for="{{ feature.name }}" title="{{ feature.description }}">
+                                    {{ feature.label }}
+                                </label>
+                                <input type="number" step="any" id="{{ feature.name }}" name="{{ feature.name }}" 
+                                       placeholder="Optional" class="form-control">
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    
+                    <button type="button" class="btn-link" id="toggle-features">
+                        <i class="fas fa-chevron-down"></i> Show All {{ features|length }} Features
+                    </button>
+                    {% endif %}
+                    
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-magic"></i> Predict
+                        </button>
+                        <button type="reset" class="btn btn-secondary">
+                            <i class="fas fa-redo"></i> Reset
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="result-card" id="result-manual" style="display: none;">
+                <h3>Prediction Result</h3>
+                <div class="result-content">
+                    <div class="result-main">
+                        <div class="result-icon" id="result-icon">
+                            <i class="fas fa-globe"></i>
+                        </div>
+                        <div class="result-text">
+                            <h2 id="result-prediction">--</h2>
+                            <p id="result-confidence">Confidence: --</p>
+                        </div>
+                    </div>
+                    <div class="result-details">
+                        <div class="probability-bar">
+                            <div class="probability-label">
+                                <span>Exoplanet</span>
+                                <span id="prob-exoplanet">0%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="progress-exoplanet"></div>
+                            </div>
+                        </div>
+                        <div class="probability-bar">
+                            <div class="probability-label">
+                                <span>Non-Exoplanet</span>
+                                <span id="prob-non-exoplanet">0%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="progress-non-exoplanet"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Upload Tab -->
+        <div class="tab-content" id="upload-tab">
+            <div class="prediction-card">
+                <h3>Batch Upload for Multiple Predictions</h3>
+                <p class="help-text">
+                    <i class="fas fa-info-circle"></i>
+                    Upload a CSV file containing exoplanet parameters. The file should include columns for the features used by the model.
+                </p>
+                
+                <form id="upload-form" enctype="multipart/form-data">
+                    <div class="upload-area" id="upload-area">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                        <p>Drag and drop your CSV file here</p>
+                        <p class="upload-or">or</p>
+                        <input type="file" id="file-input" name="file" accept=".csv" style="display: none;">
+                        <button type="button" class="btn btn-secondary" onclick="document.getElementById('file-input').click();">
+                            <i class="fas fa-folder-open"></i> Browse Files
+                        </button>
+                        <p class="file-name" id="file-name"></p>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary" id="upload-btn">
+                            <i class="fas fa-paper-plane"></i> Analyze Batch
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="result-card" id="result-batch" style="display: none;">
+                <h3>Batch Prediction Results</h3>
+                <div class="batch-summary">
+                    <div class="batch-stat">
+                        <div class="batch-value" id="batch-total">0</div>
+                        <div class="batch-label">Total Analyzed</div>
+                    </div>
+                    <div class="batch-stat">
+                        <div class="batch-value" id="batch-exoplanets">0</div>
+                        <div class="batch-label">Exoplanets Found</div>
+                    </div>
+                    <div class="batch-stat">
+                        <div class="batch-value" id="batch-non-exoplanets">0</div>
+                        <div class="batch-label">Non-Exoplanets</div>
+                    </div>
+                </div>
+                
+                <div class="results-table-container">
+                    <table class="results-table" id="results-table">
+                        <thead>
+                            <tr>
+                                <th>Index</th>
+                                <th>Prediction</th>
+                                <th>Confidence</th>
+                            </tr>
+                        </thead>
+                        <tbody id="results-tbody">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/predict.js') }}"></script>
+{% endblock %}
+

@@ -1,0 +1,136 @@
+{% extends "base.html" %}
+
+{% block title %}Statistics - Exoplanet Hunter AI{% endblock %}
+
+{% block extra_css %}
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+{% endblock %}
+
+{% block content %}
+<div class="statistics-page">
+    <div class="container">
+        <h1 class="page-title">
+            <i class="fas fa-chart-line"></i>
+            Model Performance & Statistics
+        </h1>
+
+        <div class="metrics-grid">
+            <div class="metric-card">
+                <div class="metric-icon accuracy">
+                    <i class="fas fa-bullseye"></i>
+                </div>
+                <div class="metric-content">
+                    <div class="metric-value">{{ "%.2f"|format(metrics.test_accuracy * 100) }}%</div>
+                    <div class="metric-label">Test Accuracy</div>
+                </div>
+            </div>
+
+            <div class="metric-card">
+                <div class="metric-icon precision">
+                    <i class="fas fa-crosshairs"></i>
+                </div>
+                <div class="metric-content">
+                    <div class="metric-value">{{ "%.2f"|format(metrics.test_precision * 100) }}%</div>
+                    <div class="metric-label">Precision</div>
+                </div>
+            </div>
+
+            <div class="metric-card">
+                <div class="metric-icon recall">
+                    <i class="fas fa-search"></i>
+                </div>
+                <div class="metric-content">
+                    <div class="metric-value">{{ "%.2f"|format(metrics.test_recall * 100) }}%</div>
+                    <div class="metric-label">Recall</div>
+                </div>
+            </div>
+
+            <div class="metric-card">
+                <div class="metric-icon f1">
+                    <i class="fas fa-balance-scale"></i>
+                </div>
+                <div class="metric-content">
+                    <div class="metric-value">{{ "%.2f"|format(metrics.test_f1_score * 100) }}%</div>
+                    <div class="metric-label">F1 Score</div>
+                </div>
+            </div>
+
+            <div class="metric-card">
+                <div class="metric-icon roc">
+                    <i class="fas fa-chart-area"></i>
+                </div>
+                <div class="metric-content">
+                    <div class="metric-value">{{ "%.2f"|format(metrics.test_roc_auc * 100) }}%</div>
+                    <div class="metric-label">ROC AUC</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="chart-section">
+            <div class="chart-card">
+                <h3>Model Performance Comparison</h3>
+                <div id="metrics-chart"></div>
+            </div>
+        </div>
+
+        {% if feature_importance_plot %}
+        <div class="chart-section">
+            <div class="chart-card">
+                <h3>Feature Importance Analysis</h3>
+                <div id="importance-chart"></div>
+            </div>
+        </div>
+        {% endif %}
+
+        <div class="info-section">
+            <div class="info-card">
+                <h3><i class="fas fa-robot"></i> Model Architecture</h3>
+                <p>Ensemble model combining four powerful algorithms:</p>
+                <ul>
+                    <li><strong>Random Forest:</strong> 200 trees with max depth of 20</li>
+                    <li><strong>XGBoost:</strong> Gradient boosting with 200 estimators</li>
+                    <li><strong>LightGBM:</strong> Fast gradient boosting framework</li>
+                    <li><strong>Gradient Boosting:</strong> Traditional GB with optimal parameters</li>
+                </ul>
+                <p>The models vote with soft voting to produce final predictions.</p>
+            </div>
+
+            <div class="info-card">
+                <h3><i class="fas fa-database"></i> Training Data</h3>
+                <p>The model was trained on comprehensive datasets from:</p>
+                <ul>
+                    <li><strong>Kepler Mission:</strong> 9 years of data (2009-2018)</li>
+                    <li><strong>K2 Mission:</strong> Extended Kepler mission data</li>
+                    <li><strong>TESS Mission:</strong> Ongoing observations since 2018</li>
+                </ul>
+                <p>Combined dataset includes thousands of confirmed exoplanets, candidates, and false positives.</p>
+            </div>
+
+            <div class="info-card">
+                <h3><i class="fas fa-cogs"></i> Preprocessing Techniques</h3>
+                <ul>
+                    <li><strong>Data Harmonization:</strong> Unified features across missions</li>
+                    <li><strong>Missing Value Imputation:</strong> Median strategy for robustness</li>
+                    <li><strong>Feature Scaling:</strong> StandardScaler for normalization</li>
+                    <li><strong>Class Balancing:</strong> SMOTE for handling imbalanced data</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Render metrics comparison chart
+    var metricsPlot = {{ metrics_plot|safe }};
+    Plotly.newPlot('metrics-chart', metricsPlot.data, metricsPlot.layout);
+
+    {% if feature_importance_plot %}
+    // Render feature importance chart
+    var importancePlot = {{ feature_importance_plot|safe }};
+    Plotly.newPlot('importance-chart', importancePlot.data, importancePlot.layout);
+    {% endif %}
+</script>
+{% endblock %}
+
