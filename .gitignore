@@ -1,0 +1,32 @@
+# Large model files (too big for GitHub)
+models/exoplanet_model.pkl
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# Virtual environment
+venv/
+env/
+ENV/
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+training_output.log
+
+# Temporary files
+*.tmp
+*.temp
