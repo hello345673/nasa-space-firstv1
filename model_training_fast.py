@@ -286,7 +286,7 @@ def train_fast_model():
     
     # Skip cross-validation - just train directly!
     print("\n" + "="*70)
-    print("🎯 TRAINING MODEL (No CV - Single Training Run)")
+    print("TRAINING MODEL (No CV - Single Training Run)")
     print("="*70)
     metrics = classifier.train(X_train_scaled, y_train, X_val_scaled, y_val, use_smote=True)
     

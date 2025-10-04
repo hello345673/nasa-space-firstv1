@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Exoplanet Hunter AI{% endblock %}</title>
+    <title>{% block title %}Exoplanet Detection System{% endblock %}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     {% block extra_css %}{% endblock %}
@@ -12,8 +12,7 @@
     <nav class="navbar">
         <div class="container">
             <div class="nav-brand">
-                <i class="fas fa-planet-ringed"></i>
-                <span>Exoplanet Hunter AI</span>
+                <span>Exoplanet Detection</span>
             </div>
             <ul class="nav-menu">
                 <li><a href="{{ url_for('index') }}" {% if request.endpoint == 'index' %}class="active"{% endif %}>
@@ -28,6 +27,12 @@
                 <li><a href="{{ url_for('about') }}" {% if request.endpoint == 'about' %}class="active"{% endif %}>
                     <i class="fas fa-info-circle"></i> About
                 </a></li>
+                <li><a href="{{ url_for('methodology') }}" {% if request.endpoint == 'methodology' %}class="active"{% endif %}>
+                    <i class="fas fa-cogs"></i> Method
+                </a></li>
+                <li><a href="{{ url_for('datasets') }}" {% if request.endpoint == 'datasets' %}class="active"{% endif %}>
+                    <i class="fas fa-database"></i> Data
+                </a></li>
             </ul>
         </div>
     </nav>
@@ -38,8 +43,8 @@
 
     <footer>
         <div class="container">
-            <p>&copy; 2025 NASA Space Apps Challenge | Exoplanet Hunter AI</p>
-            <p>Data from Kepler, K2, and TESS missions</p>
+            <p>&copy; 2025 | Exoplanet Detection System</p>
+            <p>NASA Kepler, K2, and TESS data</p>
         </div>
     </footer>
 

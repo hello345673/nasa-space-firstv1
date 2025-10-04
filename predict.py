@@ -13,22 +13,22 @@ import json
 
 planet_data = {
     # Planet Transit Parameters
-    'pl_orbper': 9.73,         # Orbital Period (days)
-    'pl_trandur': 4.1,         # Transit Duration (hours)
-    'pl_trandep': 457,         # Transit Depth (ppm) - ≈ (2.1 R_earth / 0.9 R_sun)^2
-    'pl_rade': 2.1,            # Planet Radius (Earth radii)
-    'pl_eqt': 680,             # Planet Temperature (Kelvin)
-    'pl_insol': 45.3,          # Insolation Flux (Earth flux)
-    'pl_imppar': 0.36,         # Impact Parameter (0-1)
+    'pl_orbper': 14.30,        # Orbital Period (days) - relatively few transits in short missions
+    'pl_trandur': 2.3,         # Transit Duration (hours) - fairly short duration
+    'pl_trandep': 85,          # Transit Depth (ppm) - very shallow (≈ 1.2 R_earth / 1.2 R_sun)^2
+    'pl_rade': 1.20,           # Planet Radius (Earth radii) - small planet
+    'pl_eqt': 560,             # Planet Temperature (Kelvin) - warm temperate-ish
+    'pl_insol': 18.5,          # Insolation Flux (Earth flux) - modest
+    'pl_imppar': 0.92,         # Impact Parameter (0-1) - very grazing transit (near-limb) → V-shaped, shallow
     
     # Star Parameters
-    'st_teff': 5250,           # Star Temperature (Kelvin) - K-type star
-    'st_rad': 0.9,             # Star Radius (Solar radii)
-    'st_logg': 4.5,            # Star Surface Gravity (log g)
+    'st_teff': 6100,           # Star Temperature (Kelvin) - slightly hotter than Sun
+    'st_rad': 1.20,            # Star Radius (Solar radii) - larger star reduces depth
+    'st_logg': 4.30,           # Star Surface Gravity (log g)
     
     # Position
-    'ra': 150.123,             # Right Ascension (degrees)
-    'dec': -22.45              # Declination (degrees)
+    'ra': 187.321,             # Right Ascension (degrees)
+    'dec': 11.452              # Declination (degrees)
 }
 
 # ============================================================================

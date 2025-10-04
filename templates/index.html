@@ -1,64 +1,120 @@
 {% extends "base.html" %}
 
-{% block title %}Home - Exoplanet Hunter AI{% endblock %}
+{% block title %}Exoplanet Detection System{% endblock %}
 
 {% block content %}
-<div class="hero">
-    <div class="container">
+<div class="modern-hero">
+    <!-- Background Elements -->
+    <div class="hero-background">
+        <div class="gradient-orb gradient-orb-1"></div>
+        <div class="gradient-orb gradient-orb-2"></div>
+        <div class="gradient-orb gradient-orb-3"></div>
+    </div>
+    
+    <!-- Main Content -->
+    <div class="hero-container">
         <div class="hero-content">
-            <h1 class="hero-title">
-                <i class="fas fa-globe"></i>
-                Discover New Worlds
+            <!-- Announcement Badge -->
+            <div class="announcement-badge">
+                <span class="badge-text">Introducing AI-Powered Exoplanet Detection</span>
+                <div class="badge-arrow">→</div>
+            </div>
+            
+            <!-- Main Heading -->
+            <h1 class="hero-heading">
+                <span class="heading-line">Modern Solutions for</span>
+                <span class="heading-line highlight">Exoplanet Discovery</span>
             </h1>
-            <p class="hero-subtitle">
-                AI-Powered Exoplanet Detection using NASA's Kepler, K2, and TESS Mission Data
+            
+            <!-- Subtitle -->
+            <p class="hero-description">
+                Highly accurate classification system for identifying exoplanets using NASA mission data. 
+                Built with advanced machine learning and validated on 21,000+ planetary candidates.
             </p>
-            <div class="hero-buttons">
-                <a href="{{ url_for('predict') }}" class="btn btn-primary">
-                    <i class="fas fa-rocket"></i> Start Hunting
+            
+            <!-- Action Buttons -->
+            <div class="hero-actions">
+                <a href="{{ url_for('predict') }}" class="btn-primary">
+                    <span>Start Classification</span>
                 </a>
-                <a href="{{ url_for('statistics') }}" class="btn btn-secondary">
-                    <i class="fas fa-chart-bar"></i> View Statistics
+                <a href="{{ url_for('methodology') }}" class="btn-secondary">
+                    <span>View Methodology</span>
                 </a>
             </div>
+        </div>
+        
+        <!-- Demo Section -->
+        <div class="hero-demo">
+            <div class="demo-container">
+                <div class="demo-screen">
+                    <div class="demo-header">
+                        <div class="demo-dots">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                        <div class="demo-title">Exoplanet Detection System</div>
+                    </div>
+                    <div class="demo-content">
+                        <div class="demo-stats">
+                            <div class="stat-item">
+                                <div class="stat-value">{{ "%.0f"|format(metrics.metrics.test_accuracy * 100) }}%</div>
+                                <div class="stat-label">Accuracy</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-value">21K+</div>
+                                <div class="stat-label">Samples</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-value">12</div>
+                                <div class="stat-label">Features</div>
+                            </div>
+                        </div>
+                        <div class="demo-chart">
+                            <div class="chart-bar" style="height: 60%"></div>
+                            <div class="chart-bar" style="height: 80%"></div>
+                            <div class="chart-bar" style="height: 45%"></div>
+                            <div class="chart-bar" style="height: 90%"></div>
+                            <div class="chart-bar" style="height: 70%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="intro-section">
+    <div class="container">
+        <div class="intro-content">
+            <h2>Exoplanet Classification</h2>
+            <p>This system classifies planetary candidates using transit data from NASA's Kepler, K2, and TESS missions. The model achieves <strong>{{ "%.1f"|format(metrics.metrics.test_accuracy * 100) }}% accuracy</strong> on test data.</p>
         </div>
     </div>
 </div>
 
 <div class="features-section">
     <div class="container">
-        <h2 class="section-title">How It Works</h2>
+        <h2 class="section-title">Features</h2>
         <div class="features-grid">
             <div class="feature-card">
-                <div class="feature-icon">
-                    <i class="fas fa-database"></i>
-                </div>
-                <h3>Multi-Mission Data</h3>
-                <p>Trained on comprehensive datasets from NASA's Kepler, K2, and TESS missions, combining thousands of confirmed exoplanets and candidates.</p>
+                <h3>Data Sources</h3>
+                <p>Kepler, K2, and TESS mission data with 21,000+ samples</p>
             </div>
             
             <div class="feature-card">
-                <div class="feature-icon">
-                    <i class="fas fa-brain"></i>
-                </div>
-                <h3>Advanced AI Model</h3>
-                <p>Ensemble machine learning model combining Random Forest, XGBoost, LightGBM, and Gradient Boosting for maximum accuracy.</p>
+                <h3>Classification Model</h3>
+                <p>Ensemble method with {{ "%.1f"|format(metrics.metrics.test_accuracy * 100) }}% accuracy on test data</p>
             </div>
             
             <div class="feature-card">
-                <div class="feature-icon">
-                    <i class="fas fa-upload"></i>
-                </div>
-                <h3>Flexible Input</h3>
-                <p>Enter data manually or upload CSV files for batch processing. Perfect for researchers and enthusiasts alike.</p>
+                <h3>Input Methods</h3>
+                <p>Manual entry or CSV file upload for batch processing</p>
             </div>
             
             <div class="feature-card">
-                <div class="feature-icon">
-                    <i class="fas fa-chart-line"></i>
-                </div>
-                <h3>High Accuracy</h3>
-                <p>Achieves exceptional performance with balanced precision and recall, validated on extensive test datasets.</p>
+                <h3>Performance</h3>
+                <p>Validated on extensive test datasets with confidence scores</p>
             </div>
         </div>
     </div>
@@ -69,19 +125,19 @@
         <h2 class="section-title">Model Statistics</h2>
         <div class="stats-grid">
             <div class="stat-card">
-                <div class="stat-value" id="accuracy-stat">--</div>
+                <div class="stat-value">{{ "%.1f"|format(metrics.metrics.test_accuracy * 100) }}%</div>
                 <div class="stat-label">Accuracy</div>
             </div>
             <div class="stat-card">
-                <div class="stat-value" id="precision-stat">--</div>
+                <div class="stat-value">{{ "%.1f"|format(metrics.metrics.test_precision * 100) }}%</div>
                 <div class="stat-label">Precision</div>
             </div>
             <div class="stat-card">
-                <div class="stat-value" id="recall-stat">--</div>
+                <div class="stat-value">{{ "%.1f"|format(metrics.metrics.test_recall * 100) }}%</div>
                 <div class="stat-label">Recall</div>
             </div>
             <div class="stat-card">
-                <div class="stat-value" id="f1-stat">--</div>
+                <div class="stat-value">{{ "%.1f"|format(metrics.metrics.test_f1_score * 100) }}%</div>
                 <div class="stat-label">F1 Score</div>
             </div>
         </div>
@@ -90,33 +146,13 @@
 
 <div class="cta-section">
     <div class="container">
-        <h2>Ready to Discover Exoplanets?</h2>
-        <p>Start analyzing planetary data and contribute to space exploration</p>
+        <h2>Get Started</h2>
+        <p>Upload data or enter parameters to classify planetary candidates</p>
         <a href="{{ url_for('predict') }}" class="btn btn-large">
-            <i class="fas fa-satellite"></i> Launch Detection
+            Classify Data
         </a>
     </div>
 </div>
 {% endblock %}
 
-{% block extra_js %}
-<script>
-    // Load and display model statistics
-    fetch('/api/model-info')
-        .then(response => response.json())
-        .then(data => {
-            if (data.metrics) {
-                document.getElementById('accuracy-stat').textContent = 
-                    (data.metrics.test_accuracy * 100).toFixed(1) + '%';
-                document.getElementById('precision-stat').textContent = 
-                    (data.metrics.test_precision * 100).toFixed(1) + '%';
-                document.getElementById('recall-stat').textContent = 
-                    (data.metrics.test_recall * 100).toFixed(1) + '%';
-                document.getElementById('f1-stat').textContent = 
-                    (data.metrics.test_f1_score * 100).toFixed(1) + '%';
-            }
-        })
-        .catch(error => console.error('Error loading stats:', error));
-</script>
-{% endblock %}
 

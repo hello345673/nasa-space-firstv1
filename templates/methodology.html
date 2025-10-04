@@ -1,0 +1,445 @@
+{% extends "base.html" %}
+
+{% block title %}Methodology - Exoplanet Hunter AI{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <div class="container">
+        <h1><i class="fas fa-cogs"></i> Methodology & Training Process</h1>
+        <p>Deep dive into our machine learning approach and model architecture</p>
+    </div>
+</div>
+
+<div class="methodology-content">
+    <div class="container">
+        
+        <!-- Model Architecture -->
+        <section class="methodology-section">
+            <h2><i class="fas fa-brain"></i> Model Architecture</h2>
+            <div class="architecture-grid">
+                <div class="arch-card">
+                    <h3>Ensemble Learning</h3>
+                    <p>Our model combines <strong>5 different machine learning algorithms</strong> to maximize accuracy and robustness:</p>
+                    <ul>
+                        <li><strong>Random Forest</strong> (1,600 estimators)</li>
+                        <li><strong>XGBoost</strong> (1,600 estimators)</li>
+                        <li><strong>LightGBM</strong> (1,600 estimators)</li>
+                        <li><strong>Gradient Boosting</strong> (1,600 estimators)</li>
+                        <li><strong>ExtraTrees</strong> (1,600 estimators)</li>
+                    </ul>
+                </div>
+                
+                <div class="arch-card">
+                    <h3>Voting Classifier</h3>
+                    <p>Final predictions are made through <strong>majority voting</strong> of all ensemble members, ensuring robust and reliable results even when individual models disagree.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Training Process -->
+        <section class="methodology-section">
+            <h2><i class="fas fa-graduation-cap"></i> Training Process</h2>
+            
+            <div class="training-steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3>Data Collection & Preprocessing</h3>
+                        <p>Combined datasets from NASA's Kepler, K2, and TESS missions:</p>
+                        <ul>
+                            <li><strong>21,171 total samples</strong> (10,366 confirmed exoplanets, 10,805 non-exoplanets)</li>
+                            <li><strong>12 core features</strong> selected for maximum predictive power</li>
+                            <li>Standardized column names across all missions</li>
+                            <li>Missing value imputation using median values</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3>Feature Engineering</h3>
+                        <p>Selected the most predictive features based on physical principles:</p>
+                        <div class="feature-categories">
+                            <div class="feature-category">
+                                <h4>Planetary Parameters</h4>
+                                <ul>
+                                    <li>Orbital Period (pl_orbper)</li>
+                                    <li>Transit Duration (pl_trandur)</li>
+                                    <li>Transit Depth (pl_trandep)</li>
+                                    <li>Planet Radius (pl_rade)</li>
+                                    <li>Planet Temperature (pl_eqt)</li>
+                                    <li>Insolation Flux (pl_insol)</li>
+                                    <li>Impact Parameter (pl_imppar)</li>
+                                </ul>
+                            </div>
+                            <div class="feature-category">
+                                <h4>Stellar Parameters</h4>
+                                <ul>
+                                    <li>Star Temperature (st_teff)</li>
+                                    <li>Star Radius (st_rad)</li>
+                                    <li>Surface Gravity (st_logg)</li>
+                                </ul>
+                            </div>
+                            <div class="feature-category">
+                                <h4>Positional Data</h4>
+                                <ul>
+                                    <li>Right Ascension (ra)</li>
+                                    <li>Declination (dec)</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3>Data Split & Validation</h3>
+                        <p>Stratified train-validation-test split to ensure balanced representation:</p>
+                        <ul>
+                            <li><strong>70% Training</strong> (14,820 samples)</li>
+                            <li><strong>15% Validation</strong> (3,176 samples)</li>
+                            <li><strong>15% Testing</strong> (3,176 samples)</li>
+                        </ul>
+                        <p>Cross-validation with 5 folds for robust performance estimation.</p>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h3>Model Training</h3>
+                        <p>Each ensemble member trained with optimized hyperparameters:</p>
+                        <ul>
+                            <li><strong>1,600 estimators</strong> per algorithm (based on research paper)</li>
+                            <li><strong>SMOTE</strong> for class balance</li>
+                            <li><strong>Feature scaling</strong> using StandardScaler</li>
+                            <li><strong>Early stopping</strong> to prevent overfitting</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">5</div>
+                    <div class="step-content">
+                        <h3>Evaluation & Testing</h3>
+                        <p>Comprehensive evaluation on multiple metrics:</p>
+                        <ul>
+                            <li><strong>Accuracy:</strong> 81.96% (test), 86.39% (CV)</li>
+                            <li><strong>Precision:</strong> 79.23%</li>
+                            <li><strong>Recall:</strong> 85.59%</li>
+                            <li><strong>F1-Score:</strong> 82.29%</li>
+                            <li><strong>ROC-AUC:</strong> 89.92%</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Research Foundation -->
+        <section class="methodology-section">
+            <h2><i class="fas fa-book"></i> Research Foundation</h2>
+            <p>Our methodology is based on the research paper:</p>
+            <div class="research-paper">
+                <h3>"Assessment of Ensemble-Based Machine Learning Algorithms for Exoplanet Identification"</h3>
+                <p><strong>Authors:</strong> Thiago S. F. Luz, Rodrigo A. S. Braga, Enio R. Ribeiro</p>
+                <p><strong>Journal:</strong> Electronics 2024, 13(19), 3950</p>
+                <p><strong>DOI:</strong> https://doi.org/10.3390/electronics13193950</p>
+                
+                <h4>Key Insights Applied:</h4>
+                <ul>
+                    <li>Ensemble methods achieve superior performance over single algorithms</li>
+                    <li>Hyperparameter tuning significantly improves accuracy</li>
+                    <li>Cross-validation provides robust performance estimates</li>
+                    <li>Stacking and voting classifiers outperform individual models</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Model Performance -->
+        <section class="methodology-section">
+            <h2><i class="fas fa-chart-line"></i> Model Performance</h2>
+            
+            <div class="performance-grid">
+                <div class="perf-card">
+                    <h3>Test Set Results</h3>
+                    <div class="metric-list">
+                        <div class="metric">
+                            <span class="metric-name">Accuracy:</span>
+                            <span class="metric-value">{{ "%.1f"|format(metrics.metrics.test_accuracy * 100) }}%</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-name">Precision:</span>
+                            <span class="metric-value">{{ "%.1f"|format(metrics.metrics.test_precision * 100) }}%</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-name">Recall:</span>
+                            <span class="metric-value">{{ "%.1f"|format(metrics.metrics.test_recall * 100) }}%</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-name">F1-Score:</span>
+                            <span class="metric-value">{{ "%.1f"|format(metrics.metrics.test_f1_score * 100) }}%</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-name">ROC-AUC:</span>
+                            <span class="metric-value">{{ "%.1f"|format(metrics.metrics.test_roc_auc * 100) }}%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="perf-card">
+                    <h3>Cross-Validation Results</h3>
+                    <div class="metric-list">
+                        <div class="metric">
+                            <span class="metric-name">CV Accuracy:</span>
+                            <span class="metric-value">{{ "%.1f"|format(metrics.cv_scores.accuracy.mean * 100) }}% ± {{ "%.1f"|format(metrics.cv_scores.accuracy.std * 100) }}%</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-name">CV Precision:</span>
+                            <span class="metric-value">{{ "%.1f"|format(metrics.cv_scores.precision.mean * 100) }}%</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-name">CV Recall:</span>
+                            <span class="metric-value">{{ "%.1f"|format(metrics.cv_scores.recall.mean * 100) }}%</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-name">CV F1-Score:</span>
+                            <span class="metric-value">{{ "%.1f"|format(metrics.cv_scores.f1.mean * 100) }}%</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-name">CV ROC-AUC:</span>
+                            <span class="metric-value">{{ "%.1f"|format(metrics.cv_scores.roc_auc.mean * 100) }}%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Real-World Testing -->
+        <section class="methodology-section">
+            <h2><i class="fas fa-globe"></i> Real-World Validation</h2>
+            <p>Our model has been tested on diverse exoplanet cases to ensure reliability:</p>
+            
+            <div class="test-cases">
+                <div class="test-case">
+                    <h4>✅ HD 209458b (Hot Jupiter)</h4>
+                    <p><strong>Prediction:</strong> Exoplanet (81% confidence)</p>
+                    <p><strong>Size:</strong> 15.1 Earth radii | <strong>Orbit:</strong> 3.5 days</p>
+                </div>
+                
+                <div class="test-case">
+                    <h4>✅ Super-Earth (K-type star)</h4>
+                    <p><strong>Prediction:</strong> Exoplanet (92% confidence)</p>
+                    <p><strong>Size:</strong> 2.1 Earth radii | <strong>Orbit:</strong> 9.7 days</p>
+                </div>
+                
+                <div class="test-case">
+                    <h4>✅ Small Super-Earth (F-type star)</h4>
+                    <p><strong>Prediction:</strong> Exoplanet (76% confidence)</p>
+                    <p><strong>Size:</strong> 1.2 Earth radii | <strong>Orbit:</strong> 14.3 days</p>
+                </div>
+                
+                <div class="test-case">
+                    <h4>❌ Binary Star (False Positive)</h4>
+                    <p><strong>Prediction:</strong> Not Exoplanet (94% confidence)</p>
+                    <p><strong>Size:</strong> 32 Earth radii | <strong>Depth:</strong> 21% (impossible)</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Technical Details -->
+        <section class="methodology-section">
+            <h2><i class="fas fa-code"></i> Technical Implementation</h2>
+            
+            <div class="tech-details">
+                <div class="tech-card">
+                    <h3>Programming Language</h3>
+                    <p>Python 3.8+ with scientific computing libraries</p>
+                </div>
+                
+                <div class="tech-card">
+                    <h3>ML Libraries</h3>
+                    <p>scikit-learn, XGBoost, LightGBM, imbalanced-learn</p>
+                </div>
+                
+                <div class="tech-card">
+                    <h3>Web Framework</h3>
+                    <p>Flask with interactive visualizations</p>
+                </div>
+                
+                <div class="tech-card">
+                    <h3>Data Processing</h3>
+                    <p>pandas, numpy for data manipulation and analysis</p>
+                </div>
+            </div>
+        </section>
+
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+.methodology-content {
+    padding: 2rem 0;
+}
+
+.methodology-section {
+    margin-bottom: 3rem;
+    padding: 2rem;
+    background: #f8f9fa;
+    border-radius: 10px;
+    border-left: 4px solid #007bff;
+}
+
+.architecture-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-top: 1rem;
+}
+
+.arch-card {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.training-steps {
+    margin-top: 1rem;
+}
+
+.step {
+    display: flex;
+    margin-bottom: 2rem;
+    align-items: flex-start;
+}
+
+.step-number {
+    background: #007bff;
+    color: white;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    margin-right: 1rem;
+    flex-shrink: 0;
+}
+
+.step-content {
+    flex: 1;
+}
+
+.feature-categories {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.feature-category {
+    background: white;
+    padding: 1rem;
+    border-radius: 8px;
+    border: 1px solid #e9ecef;
+}
+
+.research-paper {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 8px;
+    border: 1px solid #e9ecef;
+    margin-top: 1rem;
+}
+
+.performance-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-top: 1rem;
+}
+
+.perf-card {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.metric {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.metric-name {
+    font-weight: 500;
+}
+
+.metric-value {
+    font-weight: bold;
+    color: #007bff;
+}
+
+.test-cases {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.test-case {
+    background: white;
+    padding: 1rem;
+    border-radius: 8px;
+    border-left: 4px solid #28a745;
+}
+
+.test-case h4 {
+    margin: 0 0 0.5rem 0;
+    color: #28a745;
+}
+
+.tech-details {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.tech-card {
+    background: white;
+    padding: 1rem;
+    border-radius: 8px;
+    text-align: center;
+    border: 1px solid #e9ecef;
+}
+
+.tech-card h3 {
+    color: #007bff;
+    margin-bottom: 0.5rem;
+}
+
+@media (max-width: 768px) {
+    .architecture-grid,
+    .performance-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .step {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .step-number {
+        margin: 0 auto 1rem auto;
+    }
+}
+</style>
+{% endblock %}

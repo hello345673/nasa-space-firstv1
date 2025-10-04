@@ -20,7 +20,7 @@
                     <i class="fas fa-bullseye"></i>
                 </div>
                 <div class="metric-content">
-                    <div class="metric-value">{{ "%.2f"|format(metrics.test_accuracy * 100) }}%</div>
+                    <div class="metric-value">{{ "%.2f"|format(metrics.metrics.test_accuracy * 100) }}%</div>
                     <div class="metric-label">Test Accuracy</div>
                 </div>
             </div>
@@ -30,7 +30,7 @@
                     <i class="fas fa-crosshairs"></i>
                 </div>
                 <div class="metric-content">
-                    <div class="metric-value">{{ "%.2f"|format(metrics.test_precision * 100) }}%</div>
+                    <div class="metric-value">{{ "%.2f"|format(metrics.metrics.test_precision * 100) }}%</div>
                     <div class="metric-label">Precision</div>
                 </div>
             </div>
@@ -40,7 +40,7 @@
                     <i class="fas fa-search"></i>
                 </div>
                 <div class="metric-content">
-                    <div class="metric-value">{{ "%.2f"|format(metrics.test_recall * 100) }}%</div>
+                    <div class="metric-value">{{ "%.2f"|format(metrics.metrics.test_recall * 100) }}%</div>
                     <div class="metric-label">Recall</div>
                 </div>
             </div>
@@ -50,7 +50,7 @@
                     <i class="fas fa-balance-scale"></i>
                 </div>
                 <div class="metric-content">
-                    <div class="metric-value">{{ "%.2f"|format(metrics.test_f1_score * 100) }}%</div>
+                    <div class="metric-value">{{ "%.2f"|format(metrics.metrics.test_f1_score * 100) }}%</div>
                     <div class="metric-label">F1 Score</div>
                 </div>
             </div>
@@ -60,7 +60,7 @@
                     <i class="fas fa-chart-area"></i>
                 </div>
                 <div class="metric-content">
-                    <div class="metric-value">{{ "%.2f"|format(metrics.test_roc_auc * 100) }}%</div>
+                    <div class="metric-value">{{ "%.2f"|format(metrics.metrics.test_roc_auc * 100) }}%</div>
                     <div class="metric-label">ROC AUC</div>
                 </div>
             </div>

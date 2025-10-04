@@ -49,8 +49,10 @@ def load_model_and_data():
 
 @app.route('/')
 def index():
-    """Home page"""
-    return render_template('index.html')
+    """Home page with educational content"""
+    return render_template('index.html', 
+                         metrics=metrics,
+                         feature_count=len(feature_names) if feature_names else 0)
 
 
 @app.route('/predict', methods=['GET', 'POST'])
@@ -204,7 +206,21 @@ def statistics():
 @app.route('/about')
 def about():
     """About page with project information"""
-    return render_template('about.html')
+    return render_template('about.html', 
+                         metrics=metrics,
+                         feature_count=len(feature_names) if feature_names else 0)
+
+@app.route('/methodology')
+def methodology():
+    """Detailed methodology and training information"""
+    return render_template('methodology.html', 
+                         metrics=metrics,
+                         feature_count=len(feature_names) if feature_names else 0)
+
+@app.route('/datasets')
+def datasets():
+    """Information about the datasets used"""
+    return render_template('datasets.html')
 
 
 @app.route('/api/model-info')
@@ -223,8 +239,8 @@ if __name__ == '__main__':
     print("Loading model...")
     if load_model_and_data():
         print("Starting Flask application...")
-        print("Navigate to http://localhost:8000 in your browser")
-        app.run(debug=True, host='0.0.0.0', port=8000)
+        print("Navigate to http://localhost:8001 in your browser")
+        app.run(debug=True, host='0.0.0.0', port=8001)
     else:
         print("Error: Could not load model. Please train the model first using model_training.py")
 

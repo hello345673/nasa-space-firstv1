@@ -1,13 +1,12 @@
 {% extends "base.html" %}
 
-{% block title %}Predict - Exoplanet Hunter AI{% endblock %}
+{% block title %}Classification - Exoplanet Detection{% endblock %}
 
 {% block content %}
 <div class="predict-page">
     <div class="container">
         <h1 class="page-title">
-            <i class="fas fa-search-location"></i>
-            Exoplanet Detection
+            Classification
         </h1>
         
         <div class="predict-tabs">
@@ -22,11 +21,10 @@
         <!-- Manual Entry Tab -->
         <div class="tab-content active" id="manual-tab">
             <div class="prediction-card">
-                <h3>Enter Exoplanet Parameters</h3>
-                <p class="help-text">
-                    <i class="fas fa-info-circle"></i>
-                    Enter known values for the planetary parameters. Leave fields blank if unknown - they'll be filled with typical values.
-                </p>
+            <h3>Enter Parameters</h3>
+            <p class="help-text">
+                Enter known values. Leave blank if unknown.
+            </p>
                 <form id="predict-form">
                     <div class="form-grid">
                         {% for feature in features[:10] %}
@@ -55,17 +53,17 @@
                         </div>
                     </div>
                     
-                    <button type="button" class="btn-link" id="toggle-features">
-                        <i class="fas fa-chevron-down"></i> Show All {{ features|length }} Features
-                    </button>
+            <button type="button" class="btn-link" id="toggle-features">
+                Show All {{ features|length }} Features
+            </button>
                     {% endif %}
                     
                     <div class="form-actions">
                         <button type="submit" class="btn btn-primary">
-                            <i class="fas fa-magic"></i> Predict
+                            Classify
                         </button>
                         <button type="reset" class="btn btn-secondary">
-                            <i class="fas fa-redo"></i> Reset
+                            Reset
                         </button>
                     </div>
                 </form>
