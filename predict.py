@@ -11,24 +11,25 @@ import json
 # EDIT THESE VALUES TO TEST DIFFERENT PLANETS
 # ============================================================================
 
+# Test with HD 209458b (confirmed exoplanet - "Osiris")
 planet_data = {
-    # Planet Transit Parameters
-    'pl_orbper': 14.30,        # Orbital Period (days) - relatively few transits in short missions
-    'pl_trandur': 2.3,         # Transit Duration (hours) - fairly short duration
-    'pl_trandep': 85,          # Transit Depth (ppm) - very shallow (≈ 1.2 R_earth / 1.2 R_sun)^2
-    'pl_rade': 1.20,           # Planet Radius (Earth radii) - small planet
-    'pl_eqt': 560,             # Planet Temperature (Kelvin) - warm temperate-ish
-    'pl_insol': 18.5,          # Insolation Flux (Earth flux) - modest
-    'pl_imppar': 0.92,         # Impact Parameter (0-1) - very grazing transit (near-limb) → V-shaped, shallow
+    # HD 209458b Parameters (Real Exoplanet)
+    'pl_orbper': 3.52,         # days — known orbital period
+    'pl_trandur': 3.0,         # hours — typical transit duration
+    'pl_trandep': 150,         # ppm — reasonable depth for hot Jupiter
+    'pl_rade': 15.1,           # Earth radii — hot Jupiter size
+    'pl_eqt': 1450,            # K — hot Jupiter temperature
+    'pl_insol': 1000,          # Earth flux — high insolation
+    'pl_imppar': 0.5,          # moderate impact parameter
     
-    # Star Parameters
-    'st_teff': 6100,           # Star Temperature (Kelvin) - slightly hotter than Sun
-    'st_rad': 1.20,            # Star Radius (Solar radii) - larger star reduces depth
-    'st_logg': 4.30,           # Star Surface Gravity (log g)
+    # Star Parameters (HD 209458)
+    'st_teff': 6071,           # K — Sun-like star
+    'st_rad': 1.2,             # R_sun — slightly larger than Sun
+    'st_logg': 4.3,            # Star Surface Gravity (log g)
     
     # Position
-    'ra': 187.321,             # Right Ascension (degrees)
-    'dec': 11.452              # Declination (degrees)
+    'ra': 22.0,                # Right Ascension (degrees)
+    'dec': 18.9                # Declination (degrees)
 }
 
 # ============================================================================

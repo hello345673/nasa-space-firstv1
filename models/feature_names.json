@@ -1,14 +1,14 @@
 [
-  "pl_orbper",
-  "pl_trandur",
-  "pl_trandep",
-  "pl_rade",
+  "dec",
   "pl_eqt",
-  "pl_insol",
   "pl_imppar",
-  "st_teff",
-  "st_rad",
-  "st_logg",
+  "pl_insol",
+  "pl_orbper",
+  "pl_rade",
+  "pl_trandep",
+  "pl_trandur",
   "ra",
-  "dec"
+  "st_logg",
+  "st_rad",
+  "st_teff"
 ]
