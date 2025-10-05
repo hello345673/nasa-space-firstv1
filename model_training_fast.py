@@ -1,6 +1,6 @@
 """
-FAST Training Version - 5-Fold Cross-Validation (Once)
-Same code as improved version but faster for quick iteration
+Fast training script for exoplanet detection model
+Trains ensemble model with cross-validation
 """
 
 import pandas as pd
@@ -15,14 +15,14 @@ from lightgbm import LGBMClassifier
 from imblearn.over_sampling import SMOTE
 import joblib
 import json
-from data_preprocessing_fixed import FixedExoplanetDataPreprocessor
+from data_preprocessing import FixedExoplanetDataPreprocessor
 import warnings
 import time
 warnings.filterwarnings('ignore')
 
 
 class FastExoplanetClassifier:
-    """Fast ensemble classifier with 5-fold CV (once) for quick training"""
+    """Ensemble classifier for exoplanet detection"""
     
     def __init__(self, model_type='enhanced_ensemble'):
         self.model_type = model_type
@@ -33,10 +33,10 @@ class FastExoplanetClassifier:
         self.feature_importance = None
         
     def create_model(self):
-        """Create enhanced ensemble model with 5 classifiers and optimized hyperparameters"""
-        print("\n🚀 Creating Enhanced Ensemble Model...")
+        """Create ensemble model with multiple classifiers"""
+        print("\nCreating Enhanced Ensemble Model...")
         
-        # Random Forest with optimized hyperparameters (1600 estimators)
+        # Random Forest classifier
         rf_model = RandomForestClassifier(
             n_estimators=1600,
             max_depth=20,
@@ -48,7 +48,7 @@ class FastExoplanetClassifier:
             verbose=0
         )
         
-        # XGBoost with increased estimators
+        # XGBoost classifier
         xgb_model = XGBClassifier(
             n_estimators=1600,
             max_depth=10,
@@ -59,7 +59,7 @@ class FastExoplanetClassifier:
             verbosity=0
         )
         
-        # LightGBM with increased estimators
+        # LightGBM classifier
         lgbm_model = LGBMClassifier(
             n_estimators=1600,
             max_depth=10,
@@ -89,7 +89,7 @@ class FastExoplanetClassifier:
             verbose=0
         )
         
-        # Create voting ensemble with 5 models
+        # Create voting ensemble
         self.model = VotingClassifier(
             estimators=[
                 ('rf', rf_model),
@@ -103,7 +103,7 @@ class FastExoplanetClassifier:
             verbose=False
         )
         
-        print("✅ Enhanced Ensemble Created (5 models × 1600 estimators each)")
+        print("Enhanced Ensemble Created (5 models × 1600 estimators each)")
         
         return self.model
     
@@ -166,7 +166,7 @@ class FastExoplanetClassifier:
             for metric, scores in fold_scores.items()
         }
         
-        print("\n✅ Cross-Validation Results:")
+        print("\nCross-Validation Results:")
         for metric, stats in self.cv_scores.items():
             print(f"   {metric:10s}: {stats['mean']:.4f} (±{stats['std']:.4f})")
         
@@ -174,7 +174,7 @@ class FastExoplanetClassifier:
     
     def train(self, X_train, y_train, X_val, y_val, use_smote=True):
         """Train the model with optional SMOTE for class imbalance"""
-        print(f"\n🎯 Final Training on Full Training Set...")
+        print(f"\nFinal Training on Full Training Set...")
         
         start_time = time.time()
         
@@ -189,7 +189,7 @@ class FastExoplanetClassifier:
         self.model.fit(X_train_balanced, y_train_balanced)
         
         training_time = time.time() - start_time
-        print(f"   ✅ Training completed in {training_time:.1f}s ({training_time/60:.1f} min)")
+        print(f"   Training completed in {training_time:.1f}s ({training_time/60:.1f} min)")
         
         # Evaluate on validation set
         y_pred = self.model.predict(X_val)
@@ -205,7 +205,7 @@ class FastExoplanetClassifier:
             'training_time_seconds': training_time
         }
         
-        print("\n✅ Validation Metrics:")
+        print("\nValidation Metrics:")
         for metric, value in self.metrics.items():
             if metric != 'training_time_seconds':
                 print(f"   {metric:12s}: {value:.4f} ({value*100:.2f}%)")
@@ -239,7 +239,7 @@ class FastExoplanetClassifier:
         with open(metrics_path, 'w') as f:
             json.dump(save_data, f, indent=2)
         
-        print(f"\n💾 Model saved!")
+        print(f"\nModel saved!")
 
 
 def train_fast_model():
@@ -306,7 +306,7 @@ def train_fast_model():
         'test_roc_auc': roc_auc_score(y_test, y_test_proba)
     }
     
-    print("\n✅ Test Set Metrics:")
+    print("\nTest Set Metrics:")
     for metric, value in test_metrics.items():
         print(f"   {metric:18s}: {value:.4f} ({value*100:.2f}%)")
     
@@ -324,9 +324,9 @@ def train_fast_model():
         json.dump(features, f, indent=2)
     
     print("\n" + "="*70)
-    print("🎉 TRAINING COMPLETE!")
+    print("TRAINING COMPLETE!")
     print("="*70)
-    print(f"\n📈 Final Results:")
+    print(f"\nFinal Results:")
     print(f"   Test Accuracy: {test_metrics['test_accuracy']:.4f}")
     print(f"   Test F1:       {test_metrics['test_f1_score']:.4f}")
     print(f"   Test ROC-AUC:  {test_metrics['test_roc_auc']:.4f}")

@@ -1,40 +1,36 @@
 """
-Simple Prediction Script - Test Your Exoplanet Model
-Just edit the values below and run: python3 predict.py
+Prediction script for exoplanet detection
+Edit the values below and run: python3 predict.py
 """
 
 import joblib
 import numpy as np
 import json
 
-# ============================================================================
-# EDIT THESE VALUES TO TEST DIFFERENT PLANETS
-# ============================================================================
+# Edit these values to test different planets
 
-# Test with HD 209458b (confirmed exoplanet - "Osiris")
+# Test with GJ 1289 stellar parameters
 planet_data = {
-    # HD 209458b Parameters (Real Exoplanet)
-    'pl_orbper': 3.52,         # days — known orbital period
-    'pl_trandur': 3.0,         # hours — typical transit duration
-    'pl_trandep': 150,         # ppm — reasonable depth for hot Jupiter
-    'pl_rade': 15.1,           # Earth radii — hot Jupiter size
-    'pl_eqt': 1450,            # K — hot Jupiter temperature
-    'pl_insol': 1000,          # Earth flux — high insolation
-    'pl_imppar': 0.5,          # moderate impact parameter
+    # Planet parameters (unknown - using typical values for testing)
+    'pl_orbper': 10.0,         # days - typical orbital period
+    'pl_trandur': 2.0,         # hours - typical transit duration
+    'pl_trandep': 50,          # ppm - typical transit depth
+    'pl_rade': 1.5,             # Earth radii - Earth-like planet
+    'pl_eqt': 250,             # K - habitable zone temperature
+    'pl_insol': 1.0,           # Earth flux - similar to Earth
+    'pl_imppar': 0.3,          # impact parameter
     
-    # Star Parameters (HD 209458)
-    'st_teff': 6071,           # K — Sun-like star
-    'st_rad': 1.2,             # R_sun — slightly larger than Sun
-    'st_logg': 4.3,            # Star Surface Gravity (log g)
+    # GJ 1289 Star Parameters (from your data)
+    'st_teff': 3175,           # K - effective temperature
+    'st_rad': 0.245,           # R_sun - stellar radius
+    'st_logg': 4.8,            # log g - estimated for M4.5V star
     
-    # Position
-    'ra': 22.0,                # Right Ascension (degrees)
-    'dec': 18.9                # Declination (degrees)
+    # Position (approximate)
+    'ra': 0.0,                 # degrees - placeholder
+    'dec': 0.0                 # degrees - placeholder
 }
 
-# ============================================================================
-# MODEL PREDICTION (Don't edit below this line)
-# ============================================================================
+# Model prediction (don't edit below this line)
 
 def predict_exoplanet(data):
     """Make prediction using the trained model"""
@@ -65,7 +61,13 @@ def predict_exoplanet(data):
     X = np.array(X).reshape(1, -1)
     
     # Preprocess and predict
-    X_scaled = preprocessor.transform_features(X)
+    # Handle the preprocessor transform method
+    try:
+        X_scaled = preprocessor.transform_features(X)
+    except AttributeError:
+        # Fallback: use transform method directly
+        X_scaled = preprocessor.transform(X)
+    
     prediction = model.predict(X_scaled)[0]
     probability = model.predict_proba(X_scaled)[0]
     
@@ -75,13 +77,13 @@ def predict_exoplanet(data):
     print("="*70)
     
     if prediction == 1:
-        print(f"\n🌍 EXOPLANET")
+        print(f"\nEXOPLANET")
         print(f"   Confidence: {probability[1]*100:.2f}%")
     else:
-        print(f"\n❌ NOT AN EXOPLANET")
+        print(f"\nNOT AN EXOPLANET")
         print(f"   Confidence: {probability[0]*100:.2f}%")
     
-    print(f"\n📊 Probabilities:")
+    print(f"\nProbabilities:")
     print(f"   Exoplanet:     {probability[1]*100:.2f}%")
     print(f"   Non-Exoplanet: {probability[0]*100:.2f}%")
     
@@ -98,7 +100,7 @@ if __name__ == "__main__":
     try:
         prediction, probability = predict_exoplanet(planet_data)
     except Exception as e:
-        print(f"\n❌ ERROR: {e}")
+        print(f"\nERROR: {e}")
         print("\nMake sure:")
         print("  1. Model is trained (models/exoplanet_model.pkl exists)")
         print("  2. You're in the correct directory")

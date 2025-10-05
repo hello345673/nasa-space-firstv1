@@ -14,7 +14,7 @@ import plotly
 import plotly.graph_objs as go
 import plotly.express as px
 from feature_labels import get_label, get_description
-from data_preprocessing_fixed import FixedExoplanetDataPreprocessor
+from data_preprocessing import FixedExoplanetDataPreprocessor
 
 app = Flask(__name__)
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 16MB max file size
@@ -142,85 +142,6 @@ def predict():
         return jsonify({'success': False, 'error': str(e)})
 
 
-@app.route('/statistics')
-def statistics():
-    """Model statistics and performance dashboard"""
-    
-    # Create performance metrics visualization
-    metrics_data = {
-        'Metric': ['Accuracy', 'Precision', 'Recall', 'F1 Score', 'ROC AUC'],
-        'Validation': [
-            metrics.get('accuracy', 0),
-            metrics.get('precision', 0),
-            metrics.get('recall', 0),
-            metrics.get('f1_score', 0),
-            metrics.get('roc_auc', 0)
-        ],
-        'Test': [
-            metrics.get('test_accuracy', 0),
-            metrics.get('test_precision', 0),
-            metrics.get('test_recall', 0),
-            metrics.get('test_f1_score', 0),
-            metrics.get('test_roc_auc', 0)
-        ]
-    }
-    
-    df_metrics = pd.DataFrame(metrics_data)
-    
-    # Create bar chart
-    fig = go.Figure(data=[
-        go.Bar(name='Validation', x=df_metrics['Metric'], y=df_metrics['Validation']),
-        go.Bar(name='Test', x=df_metrics['Metric'], y=df_metrics['Test'])
-    ])
-    
-    fig.update_layout(
-        title='Model Performance Metrics',
-        xaxis_title='Metric',
-        yaxis_title='Score',
-        barmode='group',
-        template='plotly_dark',
-        height=500
-    )
-    
-    metrics_plot = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
-    
-    # Feature importance visualization (if available)
-    feature_importance_plot = None
-    if hasattr(preprocessor, 'feature_importance') and preprocessor.feature_importance is not None:
-        importance_df = pd.DataFrame({
-            'Feature': feature_names,
-            'Importance': preprocessor.feature_importance
-        }).sort_values('Importance', ascending=False).head(15)
-        
-        fig2 = px.bar(importance_df, x='Importance', y='Feature', orientation='h',
-                      title='Top 15 Feature Importances',
-                      template='plotly_dark')
-        feature_importance_plot = json.dumps(fig2, cls=plotly.utils.PlotlyJSONEncoder)
-    
-    return render_template('statistics.html',
-                         metrics=metrics,
-                         metrics_plot=metrics_plot,
-                         feature_importance_plot=feature_importance_plot)
-
-
-@app.route('/about')
-def about():
-    """About page with project information"""
-    return render_template('about.html', 
-                         metrics=metrics,
-                         feature_count=len(feature_names) if feature_names else 0)
-
-@app.route('/methodology')
-def methodology():
-    """Detailed methodology and training information"""
-    return render_template('methodology.html', 
-                         metrics=metrics,
-                         feature_count=len(feature_names) if feature_names else 0)
-
-@app.route('/datasets')
-def datasets():
-    """Information about the datasets used"""
-    return render_template('datasets.html')
 
 
 @app.route('/api/model-info')

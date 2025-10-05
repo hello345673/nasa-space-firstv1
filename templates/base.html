@@ -21,18 +21,6 @@
                 <li><a href="{{ url_for('predict') }}" {% if request.endpoint == 'predict' %}class="active"{% endif %}>
                     <i class="fas fa-search"></i> Predict
                 </a></li>
-                <li><a href="{{ url_for('statistics') }}" {% if request.endpoint == 'statistics' %}class="active"{% endif %}>
-                    <i class="fas fa-chart-line"></i> Statistics
-                </a></li>
-                <li><a href="{{ url_for('about') }}" {% if request.endpoint == 'about' %}class="active"{% endif %}>
-                    <i class="fas fa-info-circle"></i> About
-                </a></li>
-                <li><a href="{{ url_for('methodology') }}" {% if request.endpoint == 'methodology' %}class="active"{% endif %}>
-                    <i class="fas fa-cogs"></i> Method
-                </a></li>
-                <li><a href="{{ url_for('datasets') }}" {% if request.endpoint == 'datasets' %}class="active"{% endif %}>
-                    <i class="fas fa-database"></i> Data
-                </a></li>
             </ul>
         </div>
     </nav>

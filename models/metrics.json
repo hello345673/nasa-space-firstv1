@@ -5,7 +5,7 @@
     "recall": 0.8643086816720257,
     "f1_score": 0.8162769511084118,
     "roc_auc": 0.881763271847992,
-    "training_time_seconds": 220.7203869819641,
+    "training_time_seconds": 221.15660619735718,
     "test_accuracy": 0.8195843828715366,
     "test_precision": 0.7922619047619047,
     "test_recall": 0.8559485530546623,
